@@ -8,7 +8,7 @@ const FloatingParticles = () => {
     if (!container) return;
 
     const particles = [];
-    const PARTICLE_COUNT = 25;
+    const PARTICLE_COUNT = 12;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const particle = document.createElement('div');
@@ -25,8 +25,8 @@ const FloatingParticles = () => {
         width: ${size}px;
         height: ${size}px;
         background: hsla(${hue}, 100%, 60%, 0.8);
-        box-shadow: 0 0 ${size * 3}px hsla(${hue}, 100%, 60%, 0.5);
         animation: floatParticle ${duration}s ${delay}s linear infinite;
+        will-change: transform, opacity;
       `;
 
       container.appendChild(particle);

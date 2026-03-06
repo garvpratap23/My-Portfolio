@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const CursorGlow = () => {
   const glowRef = useRef(null);
   const trailRef = useRef(null);
+  const rafRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -14,10 +15,9 @@ const CursorGlow = () => {
       targetX = e.clientX;
       targetY = e.clientY;
 
-      // Instant position for main glow
+      // Instant position for main glow — use transform for GPU compositing
       if (glowRef.current) {
-        glowRef.current.style.left = `${e.clientX}px`;
-        glowRef.current.style.top = `${e.clientY}px`;
+        glowRef.current.style.transform = `translate3d(${e.clientX - 200}px, ${e.clientY - 200}px, 0)`;
       }
     };
 
@@ -27,34 +27,33 @@ const CursorGlow = () => {
       currentY += (targetY - currentY) * 0.08;
 
       if (trailRef.current) {
-        trailRef.current.style.left = `${currentX}px`;
-        trailRef.current.style.top = `${currentY}px`;
+        trailRef.current.style.transform = `translate3d(${currentX - 300}px, ${currentY - 300}px, 0)`;
       }
-      requestAnimationFrame(animateTrail);
+      rafRef.current = requestAnimationFrame(animateTrail);
     };
 
     const handleMouseLeave = () => setVisible(false);
     const handleMouseEnter = () => setVisible(true);
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
-    const raf = requestAnimationFrame(animateTrail);
+    rafRef.current = requestAnimationFrame(animateTrail);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafRef.current);
     };
-  }, [visible]);
+  }, []); // removed `visible` dep — no need to re-register everything on toggle
 
   return (
     <>
       {/* Main cursor glow */}
       <div
         ref={glowRef}
-        className="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none fixed top-0 left-0"
         style={{
           width: 400,
           height: 400,
@@ -63,13 +62,13 @@ const CursorGlow = () => {
           zIndex: 1,
           opacity: visible ? 1 : 0,
           transition: 'opacity 0.3s ease',
-          willChange: 'left, top',
+          willChange: 'transform',
         }}
       />
       {/* Trailing glow (lagging behind) */}
       <div
         ref={trailRef}
-        className="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none fixed top-0 left-0"
         style={{
           width: 600,
           height: 600,
@@ -78,7 +77,7 @@ const CursorGlow = () => {
           zIndex: 1,
           opacity: visible ? 1 : 0,
           transition: 'opacity 0.5s ease',
-          willChange: 'left, top',
+          willChange: 'transform',
         }}
       />
     </>

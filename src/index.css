@@ -58,14 +58,17 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  will-change: transform;
+  contain: layout style;
 }
 
 .aurora-bg::before,
 .aurora-bg::after {
   content: '';
   position: absolute;
-  width: 150%;
-  height: 150%;
+  width: 120%;
+  height: 120%;
+  will-change: transform;
 }
 
 .aurora-bg::before {
@@ -360,6 +363,8 @@ body {
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  contain: layout style;
 }
 
 .orb-1 {
@@ -637,7 +642,6 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
-  box-shadow: 0 0 6px var(--cyan);
 }
 
 @keyframes floatParticle {
