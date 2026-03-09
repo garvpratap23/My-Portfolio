@@ -7,6 +7,8 @@ import TiltCard from './TiltCard';
 const Contact = () => {
   const magneticBtn = useMagneticHover(0.25);
   const [focused, setFocused] = useState(null);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
 
   const contactItems = [
     {
@@ -127,49 +129,88 @@ const Contact = () => {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <TiltCard className="cyber-card p-8 rounded-2xl" intensity={5}>
-              <form className="space-y-5 relative z-10" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Name</label>
-                    <input
-                      type="text"
-                      className={`w-full bg-white/[0.02] border rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300 placeholder-gray-700 ${focused === 'name' ? 'border-primary/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]' : 'border-white/5'
-                        }`}
-                      placeholder="John Doe"
-                      onFocus={() => setFocused('name')}
-                      onBlur={() => setFocused(null)}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Email</label>
-                    <input
-                      type="email"
-                      className={`w-full bg-white/[0.02] border rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300 placeholder-gray-700 ${focused === 'email' ? 'border-primary/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]' : 'border-white/5'
-                        }`}
-                      placeholder="john@example.com"
-                      onFocus={() => setFocused('email')}
-                      onBlur={() => setFocused(null)}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Message</label>
-                  <textarea
-                    rows="4"
-                    className={`w-full bg-white/[0.02] border rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300 placeholder-gray-700 resize-none ${focused === 'message' ? 'border-primary/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]' : 'border-white/5'
-                      }`}
-                    placeholder="Your message..."
-                    onFocus={() => setFocused('message')}
-                    onBlur={() => setFocused(null)}
-                  />
-                </div>
-                <div {...magneticBtn}>
-                  <button className="w-full py-4 bg-gradient-to-r from-primary via-secondary to-accent rounded-xl font-bold text-white flex items-center justify-center gap-2 btn-cyber hover:shadow-[0_0_40px_rgba(0,212,255,0.2)] transition-all text-sm uppercase tracking-wider">
-                    <Send size={16} />
-                    Send Message
+              {sent ? (
+                <motion.div
+                  className="flex flex-col items-center justify-center py-12 relative z-10"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                  >
+                    <CheckCircle size={48} className="text-neon mb-4" style={{ filter: 'drop-shadow(0 0 12px #00ff88)' }} />
+                  </motion.div>
+                  <h4 className="text-xl font-bold text-white mb-2">Message Sent!</h4>
+                  <p className="text-gray-500 text-sm text-center">Thanks for reaching out. I'll get back to you soon.</p>
+                  <button
+                    onClick={() => { setSent(false); setFormData({ name: '', email: '', message: '' }); }}
+                    className="mt-6 text-xs font-mono text-primary hover:text-white transition-colors underline underline-offset-4"
+                  >
+                    Send another message
                   </button>
-                </div>
-              </form>
+                </motion.div>
+              ) : (
+                <form className="space-y-5 relative z-10" onSubmit={(e) => {
+                  e.preventDefault();
+                  if (formData.name.trim() && formData.email.trim() && formData.message.trim()) {
+                    setSent(true);
+                  }
+                }}>
+                  <div className="grid grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Name</label>
+                      <input
+                        type="text"
+                        className={`w-full bg-white/[0.02] border rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300 placeholder-gray-700 ${focused === 'name' ? 'border-primary/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]' : 'border-white/5'
+                          }`}
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onFocus={() => setFocused('name')}
+                        onBlur={() => setFocused(null)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Email</label>
+                      <input
+                        type="email"
+                        className={`w-full bg-white/[0.02] border rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300 placeholder-gray-700 ${focused === 'email' ? 'border-primary/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]' : 'border-white/5'
+                          }`}
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onFocus={() => setFocused('email')}
+                        onBlur={() => setFocused(null)}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Message</label>
+                    <textarea
+                      rows="4"
+                      className={`w-full bg-white/[0.02] border rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300 placeholder-gray-700 resize-none ${focused === 'message' ? 'border-primary/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]' : 'border-white/5'
+                        }`}
+                      placeholder="Your message..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onFocus={() => setFocused('message')}
+                      onBlur={() => setFocused(null)}
+                      required
+                    />
+                  </div>
+                  <div {...magneticBtn}>
+                    <button type="submit" className="w-full py-4 bg-gradient-to-r from-primary via-secondary to-accent rounded-xl font-bold text-white flex items-center justify-center gap-2 btn-cyber hover:shadow-[0_0_40px_rgba(0,212,255,0.2)] transition-all text-sm uppercase tracking-wider">
+                      <Send size={16} />
+                      Send Message
+                    </button>
+                  </div>
+                </form>
+              )}
             </TiltCard>
           </motion.div>
         </div>
