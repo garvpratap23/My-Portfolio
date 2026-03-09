@@ -54,6 +54,16 @@ const Projects = () => {
       gradient: "from-emerald-500 to-teal-600",
       accentColor: "#10b981",
       number: "05",
+    },
+    {
+      title: "ArtisanVista",
+      date: "Dec 2025 – Jan 2026",
+      description: "An online marketplace for handmade crafts connecting artisans with buyers. Features product listings, seller profiles, secure checkout, and a curated browsing experience that empowers local craftspeople to showcase and sell their unique creations.",
+      tech: ["React", "Node.js", "Express", "MongoDB"],
+      github: "https://github.com/garvpratap23/online-market-place-and-handmade-craft",
+      gradient: "from-indigo-500 to-fuchsia-600",
+      accentColor: "#8b5cf6",
+      number: "06",
     }
   ];
 
