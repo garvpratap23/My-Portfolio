@@ -4,6 +4,7 @@ import { ArrowRight, Download, Sparkles } from 'lucide-react';
 import useMagneticHover from '../hooks/useMagneticHover';
 import useTextScramble from '../hooks/useTextScramble';
 import useTypewriter from '../hooks/useTypewriter';
+import { SplineScene } from './ui/splite';
 
 const Hero = () => {
   const magneticBtn1 = useMagneticHover(0.3);
@@ -15,7 +16,7 @@ const Hero = () => {
   );
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <section id="home" className="min-h-screen flex items-center relative overflow-hidden pt-20">
       {/* Animated gradient meshes */}
       <div
         className="absolute top-10 left-0 w-[500px] h-[500px] rounded-full blur-[150px] opacity-20 animate-pulse-slow"
@@ -30,8 +31,11 @@ const Hero = () => {
         style={{ background: 'radial-gradient(circle, #ff2d9b, transparent)', willChange: 'opacity', animationDelay: '4s' }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-10 flex items-center gap-4">
+
+        {/* Left: text content */}
         <motion.div
+          className="flex-1 text-left"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -49,13 +53,13 @@ const Hero = () => {
 
           {/* Name with scramble effect */}
           <motion.h1
-            className="text-5xl md:text-8xl font-black mb-4 tracking-tighter"
+            className="text-5xl md:text-7xl font-black mb-4 tracking-tighter"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-white/90">Hi, I'm </span>
-            <br className="md:hidden" />
+            <br />
             <span className="neon-text font-mono">{scrambledName}</span>
           </motion.h1>
 
@@ -73,7 +77,7 @@ const Hero = () => {
 
           {/* Description */}
           <motion.p
-            className="text-lg text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-lg text-gray-500 max-w-xl mb-12 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
@@ -84,7 +88,7 @@ const Hero = () => {
 
           {/* Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-5"
+            className="flex flex-col sm:flex-row items-start gap-5"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.6 }}
@@ -109,28 +113,41 @@ const Hero = () => {
               </a>
             </div>
           </motion.div>
+        </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 0.5 }}
-          >
-            <motion.div
-              className="w-6 h-10 border-2 border-white/10 rounded-full flex justify-center pt-2"
-              animate={{ borderColor: ['rgba(255,255,255,0.1)', 'rgba(0,212,255,0.3)', 'rgba(255,255,255,0.1)'] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <motion.div
-                className="w-1 h-2 bg-primary rounded-full"
-                animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              />
-            </motion.div>
-          </motion.div>
+        {/* Right: Spline robot — no wrapper box, just the scene */}
+        <motion.div
+          className="flex-1 h-[600px] hidden md:block"
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <SplineScene
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 0.5 }}
+      >
+        <motion.div
+          className="w-6 h-10 border-2 border-white/10 rounded-full flex justify-center pt-2"
+          animate={{ borderColor: ['rgba(255,255,255,0.1)', 'rgba(0,212,255,0.3)', 'rgba(255,255,255,0.1)'] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <motion.div
+            className="w-1 h-2 bg-primary rounded-full"
+            animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
