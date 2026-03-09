@@ -9,6 +9,7 @@ const Experience = () => {
       role: "Android Application Development Trainee",
       organization: "Civic Eye Project",
       date: "Jun 2025 – Jul 2025",
+      url: "https://files.lpu.in/umsweb/skilldevcourse/SkillDevelopmentCertificates/12315700_840_20_08_2025.pdf?_gl=1%2A1j5ov8i%2A_gcl_au%2AMTY5NDY2NjkwNy4xNzU5MjIyNzIx%2A_ga%2AMTI5NzM3Njg2NS4xNzQ4NTk1NTUx%2A_ga_WKLQCVXZ47%2AczE3NjQyODE1NzAkbzgkZzEkdDE3NjQyODE1OTckajMzJGwwJGgw",
       details: [
         "Worked as an Android App Developer and developed a mobile application named Civic Eye.",
         "Gained hands-on experience on XML and Kotlin languages for both UI and UX.",
@@ -110,10 +111,15 @@ const Experience = () => {
                     whileInView="visible"
                     viewport={{ once: true }}
                   />
-                  <TiltCard className="cyber-card p-5 rounded-xl" intensity={8}>
-                    <div className="relative z-10">
-                      <h4 className="text-lg font-bold">{exp.role}</h4>
-                      <p className="text-primary text-xs font-mono mb-3">{exp.organization} <span className="text-gray-600">|</span> {exp.date}</p>
+                  <TiltCard className="cyber-card p-5 rounded-xl group" intensity={8}>
+                    <a href={exp.url} target="_blank" rel="noreferrer" className="relative z-10 block cursor-pointer">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="text-lg font-bold group-hover:text-primary transition-colors">{exp.role}</h4>
+                          <p className="text-primary text-xs font-mono mb-3">{exp.organization} <span className="text-gray-600">|</span> {exp.date}</p>
+                        </div>
+                        <ExternalLink size={14} className="text-gray-600 group-hover:text-primary transition-colors mt-1 flex-shrink-0" />
+                      </div>
                       <ul className="space-y-2">
                         {exp.details.map((detail, idx) => (
                           <li
@@ -125,7 +131,7 @@ const Experience = () => {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </a>
                   </TiltCard>
                 </motion.div>
               ))}
