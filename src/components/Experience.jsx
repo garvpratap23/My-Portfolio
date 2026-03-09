@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award, Trophy, Star } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, Trophy, Star, ExternalLink } from 'lucide-react';
 import TiltCard from './TiltCard';
 
 const Experience = () => {
@@ -39,12 +39,12 @@ const Experience = () => {
   ];
 
   const certificates = [
-    { name: "JavaScript by Codewithrandom.dev", date: "Sep 24" },
-    { name: "Introduction to Cloud Computing by IIT Kharagpur", date: "Jan – Apr 25" },
-    { name: "CSS3 by Infosys", date: "Jun 25" },
-    { name: "Master Generative AI & Tools by Infosys", date: "Aug 25" },
-    { name: "Data Analytics Simulation by Deloitte", date: "Sep 25" },
-    { name: "Data Visualization by Tata", date: "Sep 25" }
+    { name: "JavaScript by Codewithrandom.dev", date: "Sep 24", url: "https://drive.google.com/file/d/1bf_CFIsWp1qYOI2Mn9uT13_JS3_caW9G/view" },
+    { name: "Introduction to Cloud Computing by IIT Kharagpur", date: "Jan – Apr 25", url: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS11S153730233904247387" },
+    { name: "CSS3 by Infosys", date: "Jun 25", url: "https://drive.google.com/file/d/1fqvJzk5g-nuR3FXQvdfuZnjxeomv5H7f/view" },
+    { name: "Master Generative AI & Tools by Infosys", date: "Aug 25", url: "https://drive.google.com/file/d/1uwgEMfhmVhPlxe3wM8kc2kEBid0TvvKd/view" },
+    { name: "Data Analytics Simulation by Deloitte", date: "Sep 25", url: "https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_EnxN5kr8mW4cHeeq4_1759254931337_completion_certificate.pdf" },
+    { name: "Data Visualization by Tata", date: "Sep 25", url: "https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/MyXvBcppsW2FkNYCX_ifobHAoMjQs9s6bKS_EnxN5kr8mW4cHeeq4_1759254035313_completion_certificate.pdf" }
   ];
 
   const achievements = [
@@ -193,16 +193,22 @@ const Experience = () => {
 
             <div className="space-y-3">
               {certificates.map((cert, index) => (
-                <div
+                <a
                   key={index}
-                  className="cyber-card p-4 rounded-xl flex justify-between items-center gap-4 group cursor-default"
+                  href={cert.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cyber-card p-4 rounded-xl flex justify-between items-center gap-4 group cursor-pointer hover:border-primary/20 transition-all"
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-primary/30 font-mono text-xs">{String(index + 1).padStart(2, '0')}</span>
                     <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{cert.name}</span>
                   </div>
-                  <span className="text-xs font-mono text-gray-600 whitespace-nowrap">{cert.date}</span>
-                </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono text-gray-600 whitespace-nowrap">{cert.date}</span>
+                    <ExternalLink size={14} className="text-gray-600 group-hover:text-primary transition-colors" />
+                  </div>
+                </a>
               ))}
             </div>
 
