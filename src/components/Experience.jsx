@@ -48,9 +48,9 @@ const Experience = () => {
   ];
 
   const achievements = [
-    { title: "Finalist in HACKHAZARDS 2025", date: "Apr 25", icon: <Trophy size={18} />, color: "text-emerald-400", borderColor: "border-emerald-500/30", bgColor: "bg-emerald-500/5" },
-    { title: "2-star rating & Bronze Badge in SQL", date: "HackerRank | Jul 24", icon: <Star size={18} />, color: "text-amber-400", borderColor: "border-amber-500/30", bgColor: "bg-amber-500/5" },
-    { title: "3-star rating & Silver Badge in Python", date: "HackerRank | Sep 25", icon: <Star size={18} />, color: "text-gray-300", borderColor: "border-gray-400/30", bgColor: "bg-gray-400/5" },
+    { title: "Finalist in HACKHAZARDS 2025", date: "Apr 25", icon: <Trophy size={18} />, color: "text-emerald-400", borderColor: "border-emerald-500/30", bgColor: "bg-emerald-500/5", url: "https://verification.givemycertificate.com/v/6ea2efb6-2176-4a05-8605-62ba18a605f8" },
+    { title: "2-star rating & Bronze Badge in SQL", date: "HackerRank | Jul 24", icon: <Star size={18} />, color: "text-amber-400", borderColor: "border-amber-500/30", bgColor: "bg-amber-500/5", url: "https://www.hackerrank.com/profile/rajputgarv2303" },
+    { title: "3-star rating & Silver Badge in Python", date: "HackerRank | Sep 25", icon: <Star size={18} />, color: "text-gray-300", borderColor: "border-gray-400/30", bgColor: "bg-gray-400/5", url: "https://www.hackerrank.com/profile/rajputgarv2303" },
   ];
 
   const timelineDotVariants = {
@@ -224,19 +224,20 @@ const Experience = () => {
               </h3>
               <div className="space-y-4">
                 {achievements.map((ach, index) => (
-                  <div key={index}>
-                    <TiltCard className={`cyber-card p-4 rounded-xl border ${ach.borderColor} group`} intensity={6}>
+                  <a key={index} href={ach.url} target="_blank" rel="noreferrer" className="block">
+                    <TiltCard className={`cyber-card p-4 rounded-xl border ${ach.borderColor} group cursor-pointer hover:border-opacity-60 transition-all`} intensity={6}>
                       <div className="relative z-10 flex items-start gap-3">
                         <div className={`p-2 rounded-lg ${ach.bgColor} ${ach.color}`}>
                           {ach.icon}
                         </div>
-                        <div>
-                          <h4 className="font-bold text-sm text-white">{ach.title}</h4>
+                        <div className="flex-grow">
+                          <h4 className="font-bold text-sm text-white group-hover:text-primary transition-colors">{ach.title}</h4>
                           <span className="text-xs font-mono text-gray-600">{ach.date}</span>
                         </div>
+                        <ExternalLink size={14} className="text-gray-600 group-hover:text-primary transition-colors mt-1" />
                       </div>
                     </TiltCard>
-                  </div>
+                  </a>
                 ))}
               </div>
             </motion.div>
