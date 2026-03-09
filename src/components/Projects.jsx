@@ -30,10 +30,30 @@ const Projects = () => {
       date: "Jun 2025 – Jul 2025",
       description: "Mobile application to report issues related to civic sense and help find lost and found items. Integration with Firebase for backend services.",
       tech: ["XML", "Kotlin", "Firebase", "Android Studio"],
-      github: "https://github.com/garvpratap23",
+      github: "https://github.com/garvpratap23/CivicEye",
       gradient: "from-pink-500 to-rose-600",
       accentColor: "#ff2d9b",
       number: "03",
+    },
+    {
+      title: "NewsHub",
+      date: "Aug 2025 – Sep 2025",
+      description: "A real-time news aggregation web application that fetches and displays the latest headlines across multiple categories. Features a clean, responsive UI with search functionality, category filtering, and dynamic content loading for a seamless news browsing experience.",
+      tech: ["React", "JavaScript", "CSS", "News API"],
+      github: "https://github.com/garvpratap23/NewsHub",
+      gradient: "from-amber-500 to-orange-600",
+      accentColor: "#ff8c00",
+      number: "04",
+    },
+    {
+      title: "DataInsight",
+      date: "Oct 2025 – Nov 2025",
+      description: "A full-stack MERN web application that allows users to upload CSV/Excel files for automated data cleaning and exploratory data analysis (EDA). Processes datasets in real time, generates statistical summaries and visual insights, and presents interactive results through a responsive UI for efficient data understanding.",
+      tech: ["MongoDB", "Express", "React", "Node.js"],
+      github: "https://github.com/garvpratap23/Dataset-Analyser",
+      gradient: "from-emerald-500 to-teal-600",
+      accentColor: "#10b981",
+      number: "05",
     }
   ];
 
