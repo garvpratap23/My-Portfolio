@@ -663,3 +663,23 @@ body {
     opacity: 0;
   }
 }
+
+/* Lightweight CSS pulse for decorative blobs (replaces Framer Motion infinite animations) */
+@keyframes pulseSlow {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.22;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 10s ease-in-out infinite;
+  will-change: opacity, transform;
+}

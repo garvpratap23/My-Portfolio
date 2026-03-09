@@ -55,7 +55,7 @@ const Experience = () => {
 
   const timelineDotVariants = {
     hidden: { scale: 0, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: { type: 'spring', stiffness: 300, damping: 15 } }
+    visible: { scale: 1, opacity: 1, transition: { duration: 0.3 } }
   };
 
   return (
@@ -116,17 +116,13 @@ const Experience = () => {
                       <p className="text-primary text-xs font-mono mb-3">{exp.organization} <span className="text-gray-600">|</span> {exp.date}</p>
                       <ul className="space-y-2">
                         {exp.details.map((detail, idx) => (
-                          <motion.li
+                          <li
                             key={idx}
                             className="text-sm text-gray-400 flex items-start gap-2 leading-relaxed"
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
                           >
                             <span className="text-primary mt-1.5 text-[8px]">▸</span>
                             {detail}
-                          </motion.li>
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -197,12 +193,8 @@ const Experience = () => {
 
             <div className="space-y-3">
               {certificates.map((cert, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.06, duration: 0.5 }}
                   className="cyber-card p-4 rounded-xl flex justify-between items-center gap-4 group cursor-default"
                 >
                   <div className="flex items-center gap-3">
@@ -210,7 +202,7 @@ const Experience = () => {
                     <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{cert.name}</span>
                   </div>
                   <span className="text-xs font-mono text-gray-600 whitespace-nowrap">{cert.date}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -226,13 +218,7 @@ const Experience = () => {
               </h3>
               <div className="space-y-4">
                 {achievements.map((ach, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.12, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  >
+                  <div key={index}>
                     <TiltCard className={`cyber-card p-4 rounded-xl border ${ach.borderColor} group`} intensity={6}>
                       <div className="relative z-10 flex items-start gap-3">
                         <div className={`p-2 rounded-lg ${ach.bgColor} ${ach.color}`}>
@@ -244,7 +230,7 @@ const Experience = () => {
                         </div>
                       </div>
                     </TiltCard>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>

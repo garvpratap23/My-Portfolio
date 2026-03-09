@@ -42,17 +42,13 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       {/* Decorative animated blobs */}
-      <motion.div
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 opacity-15"
-        style={{ background: 'radial-gradient(circle, #00d4ff, transparent)' }}
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 opacity-15 animate-pulse-slow"
+        style={{ background: 'radial-gradient(circle, #00d4ff, transparent)', willChange: 'opacity' }}
       />
-      <motion.div
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3 opacity-10"
-        style={{ background: 'radial-gradient(circle, #ff2d9b, transparent)' }}
-        animate={{ scale: [1, 0.9, 1.1, 1] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      <div
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3 opacity-10 animate-pulse-slow"
+        style={{ background: 'radial-gradient(circle, #ff2d9b, transparent)', willChange: 'opacity', animationDelay: '3s' }}
       />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -89,13 +85,7 @@ const Contact = () => {
 
             <div className="space-y-4">
               {contactItems.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                >
+                <div key={idx}>
                   <TiltCard className={`cyber-card p-4 rounded-xl flex items-center gap-4 group border ${item.borderColor}`} intensity={6}>
                     <div className={`p-3 ${item.bgColor} rounded-xl ${item.color} transition-all duration-300 group-hover:shadow-lg ${item.glow}`}>
                       {item.icon}
@@ -111,17 +101,13 @@ const Contact = () => {
                       )}
                     </div>
                   </TiltCard>
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* Status indicator */}
-            <motion.div
+            <div
               className="mt-8 flex items-center gap-2 text-sm"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
             >
               <motion.div
                 className="w-2 h-2 rounded-full bg-neon"
@@ -130,7 +116,7 @@ const Contact = () => {
                 style={{ boxShadow: '0 0 10px #00ff88' }}
               />
               <span className="text-gray-500 font-mono text-xs">status: <span className="text-neon">open to work</span></span>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Contact Form */}

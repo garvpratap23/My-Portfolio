@@ -7,8 +7,8 @@ const InteractiveBackground = () => {
   const ripplesRef = useRef([]);
   const animFrameRef = useRef(null);
 
-  const PARTICLE_COUNT = 35;
-  const CONNECTION_DISTANCE = 100;
+  const PARTICLE_COUNT = 20;
+  const CONNECTION_DISTANCE = 80;
   const CONNECTION_DISTANCE_SQ = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
   const MOUSE_RADIUS = 180;
   const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;

@@ -17,23 +17,17 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Animated gradient meshes */}
-      <motion.div
-        className="absolute top-10 left-0 w-[500px] h-[500px] rounded-full blur-[150px] opacity-20"
-        style={{ background: 'radial-gradient(circle, #00d4ff, transparent)' }}
-        animate={{ scale: [1, 1.3, 1], x: [0, 60, 0], y: [0, -40, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      <div
+        className="absolute top-10 left-0 w-[500px] h-[500px] rounded-full blur-[150px] opacity-20 animate-pulse-slow"
+        style={{ background: 'radial-gradient(circle, #00d4ff, transparent)', willChange: 'opacity' }}
       />
-      <motion.div
-        className="absolute bottom-10 right-0 w-[600px] h-[600px] rounded-full blur-[160px] opacity-15"
-        style={{ background: 'radial-gradient(circle, #7b2ff7, transparent)' }}
-        animate={{ scale: [1, 0.8, 1.2, 1], x: [0, -40, 30, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      <div
+        className="absolute bottom-10 right-0 w-[600px] h-[600px] rounded-full blur-[160px] opacity-15 animate-pulse-slow"
+        style={{ background: 'radial-gradient(circle, #7b2ff7, transparent)', willChange: 'opacity', animationDelay: '2s' }}
       />
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full blur-[120px] opacity-10"
-        style={{ background: 'radial-gradient(circle, #ff2d9b, transparent)' }}
-        animate={{ scale: [0.8, 1.2, 0.8], rotate: [0, 180, 360] }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full blur-[120px] opacity-10 animate-pulse-slow"
+        style={{ background: 'radial-gradient(circle, #ff2d9b, transparent)', willChange: 'opacity', animationDelay: '4s' }}
       />
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">

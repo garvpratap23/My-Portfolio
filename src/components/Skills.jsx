@@ -46,12 +46,11 @@ const Skills = () => {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 60, rotateX: -15 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
     }
   };
 
@@ -81,7 +80,7 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
         >
           {skillCategories.map((category, index) => (
             <motion.div key={index} variants={cardVariants}>
@@ -97,16 +96,12 @@ const Skills = () => {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill, idx) => (
-                      <motion.span
+                      <span
                         key={idx}
                         className="px-3 py-1.5 bg-white/[0.03] text-xs font-mono text-gray-400 rounded-lg border border-white/5 pill-glow cursor-default"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 + idx * 0.03 }}
                       >
                         {skill}
-                      </motion.span>
+                      </span>
                     ))}
                   </div>
                 </div>
