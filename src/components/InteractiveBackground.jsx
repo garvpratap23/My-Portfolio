@@ -44,7 +44,7 @@ const InteractiveBackground = () => {
 
     const resize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = document.documentElement.scrollHeight;
+      canvas.height = window.innerHeight;
       if (particlesRef.current.length === 0) {
         particlesRef.current = createParticles(canvas.width, canvas.height);
       }
@@ -52,10 +52,6 @@ const InteractiveBackground = () => {
 
     resize();
     window.addEventListener('resize', resize);
-    const resizeInterval = setInterval(() => {
-      const newHeight = document.documentElement.scrollHeight;
-      if (Math.abs(canvas.height - newHeight) > 100) canvas.height = newHeight;
-    }, 3000);
 
     let lastMouseX = -1000, lastMouseY = -1000;
     const handleMouseMove = (e) => {
@@ -200,7 +196,6 @@ const InteractiveBackground = () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
-      clearInterval(resizeInterval);
     };
   }, [createParticles]);
 

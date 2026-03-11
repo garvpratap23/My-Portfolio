@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Sparkles } from 'lucide-react';
 import useMagneticHover from '../hooks/useMagneticHover';
@@ -7,8 +7,40 @@ import useTypewriter from '../hooks/useTypewriter';
 import { SplineScene } from './ui/splite';
 
 const Hero = () => {
+  const robotContainerRef = useRef(null);
   const magneticBtn1 = useMagneticHover(0.3);
   const magneticBtn2 = useMagneticHover(0.3);
+
+  const onSplineLoad = useCallback(() => {
+    // Wait for the robot's entrance zoom to finish, then simulate a click to trigger the wave
+    setTimeout(() => {
+      const canvas = robotContainerRef.current?.querySelector('canvas');
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      // Aim at the robot's upper body / arm area
+      const cx = rect.left + rect.width * 0.5;
+      const cy = rect.top + rect.height * 0.38;
+
+      const firePointer = (type) =>
+        canvas.dispatchEvent(
+          new PointerEvent(type, {
+            clientX: cx,
+            clientY: cy,
+            pointerId: 1,
+            bubbles: true,
+            cancelable: true,
+          })
+        );
+
+      // Hover first so Spline registers the cursor, then click to wave
+      firePointer('pointermove');
+      setTimeout(() => {
+        firePointer('pointerdown');
+        setTimeout(() => firePointer('pointerup'), 120);
+      }, 120);
+    }, 2200); // give the scene's intro animation time to finish
+  }, []);
   const { displayText: scrambledName } = useTextScramble('Garv Pratap Singh', { delay: 500, scrambleDuration: 2000 });
   const typedRole = useTypewriter(
     ['Full Stack Developer', 'React Enthusiast', 'Problem Solver', 'UI/UX Tinkerer', 'Open Source Contributor'],
@@ -125,6 +157,8 @@ const Hero = () => {
           <SplineScene
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"
+            onLoad={onSplineLoad}
+            containerRef={robotContainerRef}
           />
         </motion.div>
       </div>

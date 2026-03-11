@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Typewriter effect hook — types out text character by character.
@@ -10,6 +10,7 @@ const useTypewriter = (texts, options = {}) => {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const pauseTimeoutRef = useRef(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsReady(true), delay);
@@ -27,7 +28,8 @@ const useTypewriter = (texts, options = {}) => {
         setCharIndex((prev) => prev + 1);
 
         if (charIndex + 1 === currentText.length) {
-          setTimeout(() => setIsDeleting(true), pauseTime);
+          pauseTimeoutRef.current = setTimeout(() => setIsDeleting(true), pauseTime);
+          return;
         }
       } else {
         setDisplayText(currentText.slice(0, charIndex - 1));
@@ -41,7 +43,10 @@ const useTypewriter = (texts, options = {}) => {
       }
     }, isDeleting ? deleteSpeed : typeSpeed);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(pauseTimeoutRef.current);
+    };
   }, [charIndex, isDeleting, textIndex, texts, typeSpeed, deleteSpeed, pauseTime, isReady]);
 
   return displayText;

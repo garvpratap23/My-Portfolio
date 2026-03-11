@@ -10,6 +10,7 @@ const Skills = () => {
       color: "from-cyan-400 to-blue-500",
       borderColor: "border-cyan-500/20",
       glowColor: "shadow-cyan-500/10",
+      hoverGlowColor: "hover:shadow-cyan-500/10",
       skills: ["C++", "C", "JavaScript", "Java", "Python", "Kotlin", "XML"]
     },
     {
@@ -18,6 +19,7 @@ const Skills = () => {
       color: "from-purple-400 to-violet-500",
       borderColor: "border-purple-500/20",
       glowColor: "shadow-purple-500/10",
+      hoverGlowColor: "hover:shadow-purple-500/10",
       skills: ["HTML", "CSS", "Tailwind CSS", "React", "Node.js"]
     },
     {
@@ -26,6 +28,7 @@ const Skills = () => {
       color: "from-pink-400 to-rose-500",
       borderColor: "border-pink-500/20",
       glowColor: "shadow-pink-500/10",
+      hoverGlowColor: "hover:shadow-pink-500/10",
       skills: ["MySQL", "MongoDB", "Firebase", "Vercel", "Git", "GitHub", "Power BI"]
     },
     {
@@ -34,6 +37,7 @@ const Skills = () => {
       color: "from-emerald-400 to-green-500",
       borderColor: "border-emerald-500/20",
       glowColor: "shadow-emerald-500/10",
+      hoverGlowColor: "hover:shadow-emerald-500/10",
       skills: ["DSA", "OOPs", "DBMS", "OS", "Computer Networks", "System Design"]
     }
   ];
@@ -84,7 +88,7 @@ const Skills = () => {
         >
           {skillCategories.map((category, index) => (
             <motion.div key={index} variants={cardVariants}>
-              <TiltCard className={`cyber-card p-6 rounded-2xl h-full ${category.borderColor} hover:${category.glowColor}`}>
+              <TiltCard className={`cyber-card p-6 rounded-2xl h-full ${category.borderColor} ${category.hoverGlowColor}`}>
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-5">
                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-lg shadow-lg`}>

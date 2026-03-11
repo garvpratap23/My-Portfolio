@@ -17,6 +17,7 @@ const Contact = () => {
       value: 'garvpratapsinghhh@gmail.com',
       href: 'mailto:garvpratapsinghhh@gmail.com',
       color: 'text-primary',
+      hoverColor: 'hover:text-primary',
       bgColor: 'bg-primary/10',
       borderColor: 'border-primary/20',
       glow: 'shadow-primary/20',
@@ -26,6 +27,7 @@ const Contact = () => {
       label: 'Mobile',
       value: '+91 9120956689',
       color: 'text-accent',
+      hoverColor: 'hover:text-accent',
       bgColor: 'bg-accent/10',
       borderColor: 'border-accent/20',
       glow: 'shadow-accent/20',
@@ -35,11 +37,22 @@ const Contact = () => {
       label: 'Location',
       value: 'Punjab, India',
       color: 'text-neon',
+      hoverColor: 'hover:text-neon',
       bgColor: 'bg-neon/10',
       borderColor: 'border-neon/20',
       glow: 'shadow-neon/20',
     },
   ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.name.trim() && formData.email.trim() && formData.message.trim()) {
+      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+      window.open(`mailto:garvpratapsinghhh@gmail.com?subject=${subject}&body=${body}`, '_self');
+      setSent(true);
+    }
+  };
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
@@ -95,7 +108,7 @@ const Contact = () => {
                     <div className="relative z-10">
                       <p className="text-xs font-mono text-gray-600 uppercase tracking-wider">{item.label}</p>
                       {item.href ? (
-                        <a href={item.href} className={`text-sm font-medium text-gray-200 hover:${item.color} transition-colors link-glow`}>
+                        <a href={item.href} className={`text-sm font-medium text-gray-200 ${item.hoverColor} transition-colors link-glow`}>
                           {item.value}
                         </a>
                       ) : (
@@ -153,12 +166,7 @@ const Contact = () => {
                   </button>
                 </motion.div>
               ) : (
-                <form className="space-y-5 relative z-10" onSubmit={(e) => {
-                  e.preventDefault();
-                  if (formData.name.trim() && formData.email.trim() && formData.message.trim()) {
-                    setSent(true);
-                  }
-                }}>
+                <form className="space-y-5 relative z-10" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-mono text-gray-500 mb-2 uppercase tracking-wider">Name</label>
